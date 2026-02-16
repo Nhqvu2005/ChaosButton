@@ -4,7 +4,7 @@
 
 **Button Chaos** is a brain-twisting reaction game that tests your memory and speed. Follow conditional instructions that evolve based on your last action—if you clicked Red before, you might need to click Blue now! Survive the timer, build your streak, and master the chaos.
 
-![Chaos Button Gameplay Screenshot](https://via.placeholder.com/800x450.png?text=Button+Chaos+Gameplay)
+![Chaos Button Gameplay Screenshot](assets/screenshot.png)
 
 ## 🎮 How to Play
 1. **Read the Protocol:** The instruction tells you which button to click.
