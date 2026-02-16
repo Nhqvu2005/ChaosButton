@@ -129,11 +129,19 @@ class ButtonChaosGame {
 
             const btnEl = document.createElement('button');
             btnEl.className = `game-btn btn-${btnData.color}`;
-            btnEl.textContent = btnData.number;
+            // btnEl.textContent = btnData.number; // OLD
+
+            // NEW: Number + Position Badge
+            btnEl.innerHTML = `
+                ${btnData.number}
+                <span class="pos-badge">#${btnData.position}</span>
+            `;
+
             btnEl.dataset.id = i;
 
             // Interaction
-            btnEl.addEventListener('click', (e) => this.handleButtonClick(btnData, e.target));
+            // Note: e.target might be the span, so we use currentTarget or closest
+            btnEl.addEventListener('click', (e) => this.handleButtonClick(btnData, e.currentTarget));
 
             this.ui.grid.appendChild(btnEl);
         }
