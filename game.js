@@ -181,19 +181,31 @@ class ButtonChaosGame {
 
         // --- LEVEL 2: CONDITIONAL (Round 6-12) ---
         else if (isMedium) {
-            // "If previous was [Condition], click [A], else click [B]"
-            // We use known history (this.lastAction) to generate a valid rule
-
             const prevColor = this.lastAction.color;
-            const prevWasRed = prevColor === 'red';
             const prevWasOdd = this.lastAction.number % 2 !== 0;
 
             const type = Math.random();
 
             if (type < 0.5) {
                 // Color Condition
-                instruction = `If previous was <span class="highlight-red">RED</span>, click <span class="highlight-blue">BLUE</span>. Else click <span class="highlight-yellow">YELLOW</span>.`;
-                const target = prevWasRed ? 'blue' : 'yellow';
+                // 1. Pick a random color to test against previous
+                const condColor = Config.COLORS[Math.floor(Math.random() * Config.COLORS.length)];
+                const isCondTrue = prevColor === condColor;
+
+                // 2. Find valid targets on CURRENT board
+                const availableColors = [...new Set(this.buttons.map(b => b.color))];
+                const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+                const targetTrue = pick(availableColors);
+                let targetFalse = pick(availableColors);
+                // Try to ensure they are different if possible
+                if (availableColors.length > 1) {
+                    while (targetFalse === targetTrue) targetFalse = pick(availableColors);
+                }
+
+                instruction = `If previous was <span class="highlight-${condColor}">${condColor.toUpperCase()}</span>, click <span class="highlight-${targetTrue}">${targetTrue.toUpperCase()}</span>. Else click <span class="highlight-${targetFalse}">${targetFalse.toUpperCase()}</span>.`;
+
+                const target = isCondTrue ? targetTrue : targetFalse;
                 validator = (btn) => btn.color === target;
             } else {
                 // Number Condition

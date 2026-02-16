@@ -113,6 +113,21 @@ h3 {
     text-shadow: var(--glow-secondary);
 }
 
+.highlight-blue {
+    color: var(--primary);
+    text-shadow: var(--glow-primary);
+}
+
+.highlight-green {
+    color: var(--success);
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+}
+
+.highlight-yellow {
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
+}
+
 /* Buttons */
 button {
     font-family: var(--font-heading);
